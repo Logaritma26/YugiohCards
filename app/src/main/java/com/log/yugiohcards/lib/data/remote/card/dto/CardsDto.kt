@@ -8,9 +8,9 @@ data class CardsDto(
 )
 
 fun CardsDto.toCards(): Cards {
-    val netData: MutableList<Card> = mutableListOf()
-    this.data.forEach {
-        netData.add(it.toCard())
+    val cards = arrayListOf<Card>()
+    for (card in data) {
+        cards.add(card.toCard())
     }
-    return Cards(netData.toList())
+    return Cards(cards.toList())
 }

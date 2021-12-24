@@ -1,13 +1,13 @@
-package com.log.yugiohcards.lib.presentation
+package com.log.yugiohcards.lib.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -18,13 +18,18 @@ import androidx.navigation.compose.rememberNavController
 import com.log.yugiohcards.lib.presentation.navigation.BottomRoutes
 import com.log.yugiohcards.lib.presentation.navigation.Navigation
 import com.log.yugiohcards.ui.theme.YugiohCardsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalMaterialApi
+@ExperimentalAnimationApi
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // This app draws behind the system bars, so we want to handle fitting system windows
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
 
         setContent {
             YugiohCardsTheme {
@@ -48,10 +53,10 @@ class MainActivity : ComponentActivity() {
                                             contentDescription = item.description,
                                         )
                                     },
-                                    label = { Text(stringResource(item.resourceId)) },
-                                    selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
+                                    label = { Text(item.label) },
+                                    selected = currentDestination?.hierarchy?.any { it.route == item.route.path() } == true,
                                     onClick = {
-                                        navController.navigate(item.route) {
+                                        navController.navigate(item.route.path()) {
                                             // Pop up to the start destination of the graph to
                                             // avoid building up a large stack of destinations
                                             // on the back stack as users select items
@@ -68,8 +73,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
-                    }
-
+                    },
                 ) {
                     Navigation(
                         navController = navController,

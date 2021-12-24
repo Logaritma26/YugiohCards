@@ -1,20 +1,41 @@
 package com.log.yugiohcards.lib.presentation.navigation
 
-import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bookmarks
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.log.yugiohcards.R
+import androidx.navigation.NavType
 
-sealed class BottomRoutes(
-    val route: String,
-    @StringRes val resourceId: Int,
-    val icon: ImageVector,
-    val description: String?,
-) {
-    object Saved : BottomRoutes("home", R.string.route_home, Icons.Filled.Bookmarks, null)
-    object Home : BottomRoutes("saved", R.string.route_saved, Icons.Filled.Home, null)
-    object Search : BottomRoutes("search", R.string.route_search, Icons.Filled.Search, null)
+/*enum class EnumRoutes(val route: Route) {
+    HOME(route = Route(baseRoute = "home")),
+    SAVED(route = Route(baseRoute = "saved")),
+    SEARCH(route = Route(baseRoute = "search")),
+    DETAILS_PAGE(
+        route = Route(
+            baseRoute = "details",
+            args = mapOf("cardId" to ArgSpecs(type = NavType.IntType))
+        )
+    );
+}
+
+sealed class SealedRoute(val route: Route) {
+    object HOME : SealedRoute(Route(baseRoute = "home"))
+    object SAVED : SealedRoute(Route(baseRoute = "saved"))
+    object SEARCH : SealedRoute(Route(baseRoute = "search"))
+    object DETAILS_PAGE : SealedRoute(
+        Route(
+            baseRoute = "details",
+            args = mapOf("cardId" to ArgSpecs(type = NavType.IntType))
+        )
+    )
+}*/
+
+object ObjectRoutes {
+
+    // Bottom Routes
+    val HOME = Route(baseRoute = "home")
+    val SAVED = Route(baseRoute = "saved")
+    val SEARCH = Route(baseRoute = "search")
+
+    //
+    val DETAILS_PAGE = Route(
+        baseRoute = "details",
+        args = mapOf("cardId" to ArgSpecs(type = NavType.IntType))
+    )
 }

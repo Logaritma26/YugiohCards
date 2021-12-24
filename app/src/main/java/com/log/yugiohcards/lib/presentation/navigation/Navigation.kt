@@ -1,11 +1,20 @@
 package com.log.yugiohcards.lib.presentation.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.log.yugiohcards.lib.presentation.screens.details_screen.DetailsScreen
+import com.log.yugiohcards.lib.presentation.screens.home_screen.HomePage
+import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.DETAILS_PAGE
+import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.HOME
+import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SAVED
 
+@ExperimentalMaterialApi
+@ExperimentalAnimationApi
 @Composable
 fun Navigation(
     navController: NavHostController,
@@ -14,31 +23,24 @@ fun Navigation(
 
     NavHost(
         navController = navController,
-        startDestination = BottomRoutes.Home.route,
+        startDestination = HOME.path(),
         modifier = modifier,
     ) {
-        composable(BottomRoutes.Home.route) {
+        composable(HOME.path()) {
             //val viewModel = hiltViewModel<HomePageViewModel>()
-            //HomePage(viewModel = viewModel)
+            HomePage(navController)
         }
-        /*composable(
-            "card_detail_page/{color}/{card_id}",
-            arguments = listOf(
-                navArgument("color") {
-                    type = NavType.IntType
-                    this.defaultValue = Color.Blue
-                    this.nullable = false
-                },
-                navArgument("card_id") {
-                    type = NavType.StringType
-                    this.nullable = false
-                }
-            ),
+        composable(
+            route = DETAILS_PAGE.path(),
+            arguments = DETAILS_PAGE.namedNavArgs(),
         ) {
-            val cardId = remember {
-                it.arguments?.getString("cardId")
-            }
-        }*/
-    }
+            val cardId = it.arguments!!.getInt("cardId")
+            DetailsScreen(cardId = cardId)
+        }
+        composable(
+            route = SAVED.path(),
+        ) {
 
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.log.yugiohcards
+package com.log.yugiohcards.lib.presentation.main
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

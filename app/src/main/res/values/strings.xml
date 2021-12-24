@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">Yugioh Cards</string>
-    <string name="route_home">Home</string>
-    <string name="route_saved">Saved</string>
-    <string name="route_search">Search</string>
+    <string name="app_name">YGO Cards</string>
 </resources>

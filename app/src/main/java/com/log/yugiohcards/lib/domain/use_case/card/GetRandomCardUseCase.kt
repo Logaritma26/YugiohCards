@@ -5,9 +5,11 @@ import com.log.yugiohcards.lib.domain.model.card.Card
 import com.log.yugiohcards.lib.domain.repository.CardRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class GetRandomCardUseCase(private val repository: CardRepository) {
-
+class GetRandomCardUseCase @Inject constructor(
+    private val repository: CardRepository,
+) {
     operator fun invoke(): Flow<Resource<Card>> = flow {
         emit(Resource.Loading())
         try {

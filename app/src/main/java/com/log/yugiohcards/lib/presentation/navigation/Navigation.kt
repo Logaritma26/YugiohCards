@@ -1,6 +1,7 @@
 package com.log.yugiohcards.lib.presentation.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,7 +13,9 @@ import com.log.yugiohcards.lib.presentation.screens.home_screen.HomePage
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.DETAILS_PAGE
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.HOME
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SAVED
+import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SEARCH
 
+@ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
@@ -30,6 +33,12 @@ fun Navigation(
             //val viewModel = hiltViewModel<HomePageViewModel>()
             HomePage(navController)
         }
+        composable(SAVED.path()) {
+
+        }
+        composable(SEARCH.path()) {
+
+        }
         composable(
             route = DETAILS_PAGE.path(),
             arguments = DETAILS_PAGE.namedNavArgs(),
@@ -37,10 +46,6 @@ fun Navigation(
             val cardId = it.arguments!!.getInt("cardId")
             DetailsScreen(cardId = cardId)
         }
-        composable(
-            route = SAVED.path(),
-        ) {
 
-        }
     }
 }

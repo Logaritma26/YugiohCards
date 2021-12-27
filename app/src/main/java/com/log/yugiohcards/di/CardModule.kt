@@ -16,6 +16,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -50,9 +52,14 @@ object CardModule {
     @Singleton
     fun provideWordInfoRepository(
         db: CardDatabase,
-        api: CardApi
+        api: CardApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): CardRepository {
-        return CardRepositoryImpl(api, db.dao)
+        return CardRepositoryImpl(
+            api = api,
+            dao = db.dao,
+            ioDispatcher = ioDispatcher,
+        )
     }
 
     @Provides
@@ -62,8 +69,14 @@ object CardModule {
 
     @Provides
     @Singleton
-    fun provideSaveAllRemoteCardsUseCase(repository: CardRepository): SaveAllRemoteCardsUseCase =
-        SaveAllRemoteCardsUseCase(repository)
+    fun provideSaveAllRemoteCardsUseCase(
+        repository: CardRepository,
+        @ApplicationScope externalScope: CoroutineScope,
+    ): SaveAllRemoteCardsUseCase =
+        SaveAllRemoteCardsUseCase(
+            repository = repository,
+            externalScope = externalScope,
+        )
 
     @Provides
     @Singleton

@@ -5,9 +5,9 @@ import com.log.yugiohcards.lib.domain.model.card.Card
 import com.log.yugiohcards.lib.domain.repository.CardRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
+import javax.inject.Inject
 
-class GetCardWithIdUseCase(
+class GetCardWithIdUseCase @Inject constructor(
     private val repository: CardRepository,
 ) {
     operator fun invoke(cardId: Int): Flow<Resource<Card>> = flow {

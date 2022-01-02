@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CardDao {
@@ -14,20 +15,26 @@ interface CardDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCard(card: CardEntity)
 
-    @Query("DELETE FROM cardEntity WHERE id IN(:ids)")
+    @Query("DELETE FROM CardEntity WHERE id IN(:ids)")
     suspend fun deleteCards(ids: List<Int>)
 
-    @Query("DELETE FROM cardEntity WHERE id = :id")
+    @Query("DELETE FROM CardEntity WHERE id = :id")
     suspend fun deleteCard(id: Int)
 
-    @Query("SELECT * FROM cardEntity ORDER BY RANDOM () LIMIT 1 ")
-    suspend fun getRandom(): CardEntity
+    @Query("SELECT * FROM CardEntity ORDER BY RANDOM () LIMIT 1 ")
+    suspend fun getRandom(): CardEntity?
 
-    @Query("SELECT * FROM cardEntity WHERE id = :id")
-    suspend fun getSelected(id: Int): CardEntity
+    @Query("SELECT * FROM CardEntity WHERE id = :id")
+    fun getSelected(id: Int): Flow<CardEntity>
 
-    @Query("SELECT * FROM cardEntity")
+    @Query("SELECT * FROM CardEntity")
     suspend fun getAllCards(): List<CardEntity>
+
+    @Query("UPDATE CardEntity SET favorite = :favorite WHERE id = :id")
+    suspend fun updateFavorite(id: Int, favorite: Boolean)
+
+    @Query("SELECT * FROM CardEntity WHERE favorite = 1")
+    fun getFavorites(): Flow<List<CardEntity>>
 
   /*  @Query("SELECT * FROM wordinfoentity WHERE word LIKE '%' || :word || '%'")
     suspend fun getSingleCard(id: String): List<WordInfoEntity>*/

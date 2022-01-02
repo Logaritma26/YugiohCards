@@ -7,10 +7,11 @@ data class CardsDto(
     val data: List<CardDto>
 )
 
+/*
 fun CardsDto.toCards(): Cards {
     val cards = arrayListOf<Card>()
     for (card in data) {
         cards.add(card.toCard())
     }
     return Cards(cards.toList())
-}
+}*/

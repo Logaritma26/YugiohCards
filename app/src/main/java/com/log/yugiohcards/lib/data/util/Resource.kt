@@ -1,4 +1,4 @@
-package com.log.yugiohcards.core.util
+package com.log.yugiohcards.lib.data.util
 
 sealed class Resource<T>(
     val data: T? = null,

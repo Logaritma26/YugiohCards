@@ -14,6 +14,7 @@ import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.DETAILS_PAGE
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.HOME
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SAVED
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SEARCH
+import com.log.yugiohcards.lib.presentation.screens.saved_screen.SavedScreen
 
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
@@ -31,13 +32,13 @@ fun Navigation(
     ) {
         composable(HOME.path()) {
             //val viewModel = hiltViewModel<HomePageViewModel>()
-            HomePage(navController)
+            HomePage(navController = navController)
         }
         composable(SAVED.path()) {
-
+            SavedScreen(navController = navController)
         }
         composable(SEARCH.path()) {
-
+            SavedScreen(navController = navController)
         }
         composable(
             route = DETAILS_PAGE.path(),

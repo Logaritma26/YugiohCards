@@ -1,7 +1,5 @@
 package com.log.yugiohcards.lib.data.remote.card
 
-import com.log.yugiohcards.core.util.Resource
-import com.log.yugiohcards.lib.data.remote.card.dto.CardDto
 import com.log.yugiohcards.lib.data.remote.card.dto.CardsDto
 import retrofit2.http.GET
 

@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.log.yugiohcards.core.util.Resource
+import com.log.yugiohcards.lib.data.util.Resource
 import com.log.yugiohcards.lib.domain.use_case.card.GetRandomCardUseCase
 import com.log.yugiohcards.lib.domain.use_case.card.SaveAllRemoteCardsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

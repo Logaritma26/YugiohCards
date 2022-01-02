@@ -9,9 +9,7 @@ import com.log.yugiohcards.lib.data.remote.card.CardApi
 import com.log.yugiohcards.lib.data.repository.CardRepositoryImpl
 import com.log.yugiohcards.lib.data.util.GsonParser
 import com.log.yugiohcards.lib.domain.repository.CardRepository
-import com.log.yugiohcards.lib.domain.use_case.card.GetCardWithIdUseCase
-import com.log.yugiohcards.lib.domain.use_case.card.GetRandomCardUseCase
-import com.log.yugiohcards.lib.domain.use_case.card.SaveAllRemoteCardsUseCase
+import com.log.yugiohcards.lib.domain.use_case.card.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +26,7 @@ object CardModule {
 
     @Provides
     @Singleton
-    fun provideWordInfoDatabase(app: Application): CardDatabase {
+    fun provideCardDatabase(app: Application): CardDatabase {
         return Room.databaseBuilder(
             app,
             CardDatabase::class.java, "card_db",
@@ -50,15 +48,17 @@ object CardModule {
 
     @Provides
     @Singleton
-    fun provideWordInfoRepository(
+    fun provideCardRepository(
         db: CardDatabase,
         api: CardApi,
         @IoDispatcher ioDispatcher: CoroutineDispatcher,
+        @DefaultDispatcher defaultDispatcher: CoroutineDispatcher,
     ): CardRepository {
         return CardRepositoryImpl(
             api = api,
             dao = db.dao,
             ioDispatcher = ioDispatcher,
+            defaultDispatcher = defaultDispatcher,
         )
     }
 
@@ -82,5 +82,22 @@ object CardModule {
     @Singleton
     fun provideGetCardWithIdUseCase(repository: CardRepository): GetCardWithIdUseCase =
         GetCardWithIdUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideUpdateFavoriteCardUseCase(
+        repository: CardRepository,
+        @ApplicationScope externalScope: CoroutineScope,
+    ): UpdateFavoriteCardUseCase =
+        UpdateFavoriteCardUseCase(
+            repository = repository,
+            externalScope = externalScope,
+        )
+
+    @Provides
+    @Singleton
+    fun provideGetFavoriteCardsUseCase(
+        repository: CardRepository,
+    ): GetFavoriteCardsUseCase = GetFavoriteCardsUseCase(repository = repository)
 
 }

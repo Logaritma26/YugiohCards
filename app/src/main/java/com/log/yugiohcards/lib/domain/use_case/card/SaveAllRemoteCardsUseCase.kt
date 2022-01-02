@@ -1,7 +1,7 @@
 package com.log.yugiohcards.lib.domain.use_case.card
 
-import com.log.yugiohcards.core.util.Process
-import com.log.yugiohcards.core.util.Resource
+import com.log.yugiohcards.lib.data.util.Process
+import com.log.yugiohcards.lib.data.util.Resource
 import com.log.yugiohcards.di.ApplicationScope
 import com.log.yugiohcards.lib.data.remote.card.dto.CardDto
 import com.log.yugiohcards.lib.domain.repository.CardRepository
@@ -32,6 +32,7 @@ class SaveAllRemoteCardsUseCase @Inject constructor(
                                 successCount++
                             } else {
                                 failCount++
+                                Timber.d("error: ${save.message}")
                             }
                             Timber.d("success count: $successCount, fail count: $failCount")
                         }
@@ -42,6 +43,5 @@ class SaveAllRemoteCardsUseCase @Inject constructor(
                 Timber.d("cache wasn't empty")
             }
         }
-
     }
 }

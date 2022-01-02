@@ -23,7 +23,7 @@ fun HomePage(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state: HomeState = viewModel.state.value
 
     LaunchedEffect(true) {
         viewModel.getCard()
@@ -38,7 +38,7 @@ fun HomePage(
             modifier = Modifier.fillMaxSize(),
         ) {
             ItemCard(
-                card = state.currentCard,
+                imageUrl = state.currentCard?.card_images?.first()?.image_url,
                 isLoading = state.isCardLoading,
                 modifier = Modifier.padding(12.dp),
                 fraction = 0.77f,

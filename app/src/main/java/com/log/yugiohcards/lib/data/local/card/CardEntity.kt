@@ -10,12 +10,13 @@ import com.log.yugiohcards.lib.domain.model.card.CardDetails
 data class CardEntity(
     val atk: Int,
     val def: Int,
-    val attribute: String,
+    val attribute: String?,
     val card_images: List<CardImage>,
     val id: Int,
     val level: Int,
     val name: String,
     val details: CardDetails,
+    val favorite: Boolean = false,
     @PrimaryKey val roomId: Int? = null,
 ) {
     fun toCard(): Card = Card(
@@ -27,5 +28,6 @@ data class CardEntity(
         level = level,
         name = name,
         details = details,
+        favorite = favorite,
     )
 }

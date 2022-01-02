@@ -8,10 +8,11 @@ import kotlinx.parcelize.Parcelize
 data class Card(
     val atk: Int,
     val def: Int,
-    val attribute: String,
+    val attribute: String?,
     val card_images: List<CardImage>,
     val id: Int,
     val level: Int,
     val name: String,
     val details: CardDetails,
-): Parcelable
+    val favorite: Boolean,
+) : Parcelable

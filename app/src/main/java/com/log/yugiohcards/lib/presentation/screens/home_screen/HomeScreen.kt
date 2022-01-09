@@ -13,7 +13,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.DETAILS_PAGE
 import com.log.yugiohcards.lib.presentation.util.common_composables.ItemCard
-import timber.log.Timber
 
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
@@ -31,7 +30,9 @@ fun HomePage(
 
     Box(
         modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter,
     ) {
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -44,9 +45,8 @@ fun HomePage(
                 fraction = 0.77f,
                 onClick = {
                     state.currentCard?.let { it ->
-                        val args = mapOf("cardId" to it.id)
+                        val args = mapOf("cardId" to it.id, "cardPrice" to 241)
                         DETAILS_PAGE.provideNavPath(args)?.let { path ->
-                            Timber.d("path: $path")
                             navController.navigate(path)
                         }
                     }

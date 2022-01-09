@@ -4,7 +4,7 @@ import com.log.yugiohcards.lib.presentation.util.card_enums.Type
 
 object Constants {
 
-    val cardType = mapOf<String, Type>(
+    val cardType = mapOf(
         "xyz monster" to Type.XYZ,
     )
 

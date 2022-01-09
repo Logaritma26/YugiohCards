@@ -36,6 +36,4 @@ interface CardDao {
     @Query("SELECT * FROM CardEntity WHERE favorite = 1")
     fun getFavorites(): Flow<List<CardEntity>>
 
-  /*  @Query("SELECT * FROM wordinfoentity WHERE word LIKE '%' || :word || '%'")
-    suspend fun getSingleCard(id: String): List<WordInfoEntity>*/
 }

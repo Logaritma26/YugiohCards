@@ -8,13 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.log.yugiohcards.lib.presentation.screens.details_screen.DetailsScreen
-import com.log.yugiohcards.lib.presentation.screens.home_screen.HomePage
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.DETAILS_PAGE
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.HOME
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SAVED
 import com.log.yugiohcards.lib.presentation.navigation.ObjectRoutes.SEARCH
+import com.log.yugiohcards.lib.presentation.screens.details_screen.DetailsScreen
+import com.log.yugiohcards.lib.presentation.screens.home_screen.HomePage
 import com.log.yugiohcards.lib.presentation.screens.saved_screen.SavedScreen
+import com.log.yugiohcards.lib.presentation.screens.search_screen.SearchScreen
 
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
@@ -24,13 +25,13 @@ fun Navigation(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-
     NavHost(
         navController = navController,
-        startDestination = HOME.path(),
+        startDestination = SEARCH.path(),
         modifier = modifier,
     ) {
-        composable(HOME.path()) {
+        composable(HOME.path(),
+        ) {
             //val viewModel = hiltViewModel<HomePageViewModel>()
             HomePage(navController = navController)
         }
@@ -38,7 +39,7 @@ fun Navigation(
             SavedScreen(navController = navController)
         }
         composable(SEARCH.path()) {
-            SavedScreen(navController = navController)
+            SearchScreen(navController = navController)
         }
         composable(
             route = DETAILS_PAGE.path(),

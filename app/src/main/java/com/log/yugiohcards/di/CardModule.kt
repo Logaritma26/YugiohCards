@@ -100,4 +100,25 @@ object CardModule {
         repository: CardRepository,
     ): GetFavoriteCardsUseCase = GetFavoriteCardsUseCase(repository = repository)
 
+    @Provides
+    @Singleton
+    fun provideGetFilterListUseCase(
+        repository: CardRepository,
+    ): GetFilterListUseCase = GetFilterListUseCase(
+        repository = repository,
+    )
+
+    @Provides
+    @Singleton
+    fun provideGetFilteredCardsUseCase(): GetFilteredCards = GetFilteredCards()
+
+    @Provides
+    @Singleton
+    fun provideGetAllCardsUseCase(
+        repository: CardRepository,
+        @DefaultDispatcher defaultDispatcher: CoroutineDispatcher,
+    ): GetAllCardsUseCase = GetAllCardsUseCase(
+        repository = repository,
+        defaultDispatcher = defaultDispatcher,
+    )
 }

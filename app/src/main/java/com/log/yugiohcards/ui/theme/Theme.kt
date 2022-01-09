@@ -30,7 +30,7 @@ private val LightColorPalette = lightColors(
 @Composable
 fun YugiohCardsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
         DarkColorPalette
@@ -40,7 +40,7 @@ fun YugiohCardsTheme(
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = ygoTypography,
         shapes = Shapes,
         content = content
     )

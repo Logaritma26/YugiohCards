@@ -23,7 +23,7 @@ class DetailsViewModel @Inject constructor(
 
     suspend fun getCardWithId(id: Int) {
         getCardWithIdUseCase(id).onEach {
-            _state.value = DetailState(currentCard = it)
+            _state.value = _state.value.copy(currentCard = it)
         }.launchIn(viewModelScope)
     }
 

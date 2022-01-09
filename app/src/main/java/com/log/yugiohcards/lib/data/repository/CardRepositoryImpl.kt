@@ -1,14 +1,15 @@
 package com.log.yugiohcards.lib.data.repository
 
-import com.log.yugiohcards.lib.data.util.Process
-import com.log.yugiohcards.lib.data.util.Resource
 import com.log.yugiohcards.di.DefaultDispatcher
 import com.log.yugiohcards.di.IoDispatcher
 import com.log.yugiohcards.lib.data.local.card.CardDao
+import com.log.yugiohcards.lib.data.local.card.CardEntity
 import com.log.yugiohcards.lib.data.remote.card.CardApi
 import com.log.yugiohcards.lib.data.remote.card.dto.CardDto
 import com.log.yugiohcards.lib.data.remote.card.dto.CardsDto
 import com.log.yugiohcards.lib.data.remote.card.dto.toCardEntity
+import com.log.yugiohcards.lib.data.util.Process
+import com.log.yugiohcards.lib.data.util.Resource
 import com.log.yugiohcards.lib.domain.model.card.Card
 import com.log.yugiohcards.lib.domain.repository.CardRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -99,5 +100,9 @@ class CardRepositoryImpl @Inject constructor(
             }
             .flowOn(defaultDispatcher)
 
+    override suspend fun getAllCards(): List<CardEntity> =
+        withContext(ioDispatcher) {
+            dao.getAllCards()
+        }
 
 }

@@ -32,7 +32,7 @@ fun CardListTile(
     card: Card,
     cardOnClick: () -> Unit = {},
 ) {
-    val monsterCard: Boolean = card.attribute != null
+    val monsterCard: Boolean = card.details.attribute != null
 
     var expanded by remember { mutableStateOf(false) }
 

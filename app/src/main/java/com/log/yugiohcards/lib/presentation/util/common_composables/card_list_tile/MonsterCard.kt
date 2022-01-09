@@ -2,6 +2,7 @@ package com.log.yugiohcards.lib.presentation.util.common_composables.card_list_t
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,22 +39,22 @@ fun MonsterCard(
     ) {
         CardTitle(
             name = card.name,
-            attribute = card.attribute!!
+            attribute = card.details.attribute!!
         )
         Spacer(modifier = Modifier.width(4.dp))
         if (card.level > 0)
             CardLevel(
                 levelCount = card.level,
-                isXyz = card.details.type!!.isCardTypeOf(Type.XYZ),
+                isXyz = card.details.type.isCardTypeOf(Type.XYZ),
             )
         if (expanded) {
             RaceSpecs(
-                race = card.details.race!!,
-                type = card.details.type!!,
+                race = card.details.race,
+                type = card.details.type,
                 arc = card.details.archetype,
             )
             Stats(atk = card.atk, def = card.def)
-            Description(desc = card.details.desc!!)
+            Description(desc = card.details.desc)
         }
     }
 }
@@ -75,9 +76,13 @@ private fun CardTitle(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(weight = 1f),
             maxLines = 1,
+            style = MaterialTheme.typography.body1,
         )
         Spacer(modifier = Modifier.width(6.dp))
-        Text(attribute)
+        Text(
+            text = attribute,
+            style = MaterialTheme.typography.body2,
+        )
     }
 }
 
@@ -122,7 +127,8 @@ private fun RaceSpecs(
                 text = it,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 6.dp, top = 2.dp)
+                    .padding(bottom = 6.dp, top = 2.dp),
+                style = MaterialTheme.typography.subtitle2,
             )
         }
         Text(
@@ -130,6 +136,7 @@ private fun RaceSpecs(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.align(Alignment.Start),
             maxLines = 1,
+            style = MaterialTheme.typography.subtitle2,
         )
     }
 }
@@ -146,13 +153,20 @@ private fun Stats(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "ATK/$atk")
-        Text(text = "DEF/$def")
+        Text(
+            text = "ATK/$atk",
+            style = MaterialTheme.typography.subtitle2,
+        )
+        Text(
+            text = "DEF/$def",
+            style = MaterialTheme.typography.subtitle2,
+        )
     }
 }
 
 @Composable
 private fun Description(desc: String) = Text(
     text = desc,
-    modifier = Modifier.padding(vertical = 4.dp)
+    modifier = Modifier.padding(vertical = 4.dp),
+    style = MaterialTheme.typography.body2,
 )

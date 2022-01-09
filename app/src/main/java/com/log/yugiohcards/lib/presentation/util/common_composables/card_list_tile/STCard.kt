@@ -1,6 +1,7 @@
 package com.log.yugiohcards.lib.presentation.util.common_composables.card_list_tile
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,14 +32,14 @@ fun STCard(
     ) {
         CardTitle(
             name = card.name,
-            type = card.details.type!!,
-            race = card.details.race!!,
+            type = card.details.type,
+            race = card.details.race,
         )
         if (expanded) {
             card.details.archetype?.let {
                 Archetype(arc = it)
             }
-            Description(desc = card.details.desc!!)
+            Description(desc = card.details.desc)
         }
     }
 }
@@ -62,14 +63,20 @@ private fun CardTitle(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(weight = 1f),
             maxLines = 1,
+            style = MaterialTheme.typography.body1,
         )
         Column(
-            modifier = Modifier.padding(horizontal = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
-            Text(text = type)
-            Text(text = race)
+            Text(
+                text = type,
+                style = MaterialTheme.typography.body2,
+            )
+            Text(
+                text = race,
+                style = MaterialTheme.typography.body2,
+            )
         }
 
     }
@@ -86,7 +93,8 @@ private fun Archetype(arc: String) {
             text = arc,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(bottom = 6.dp, top = 2.dp)
+                .padding(bottom = 6.dp, top = 2.dp),
+            style = MaterialTheme.typography.subtitle2,
         )
     }
 }
@@ -95,6 +103,7 @@ private fun Archetype(arc: String) {
 @Composable
 private fun Description(desc: String) = Text(
     text = desc,
-    modifier = Modifier.padding(vertical = 4.dp)
+    modifier = Modifier.padding(vertical = 4.dp),
+    style = MaterialTheme.typography.body2,
 )
 
